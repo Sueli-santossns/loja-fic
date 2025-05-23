@@ -12,7 +12,7 @@ Bem-vindo ao repositório da **Loja Eunice Artesanato**, um projeto completo de 
 - Visualização de pedidos feitos
 
 ## 📸 Tela de Produtos
-<img src="https://raw.githubusercontent.com/Sueli-santossns/loja-fic/main/images/produto.png" alt="Tela de produtos" width="600" />
+<img src="https://github.com/Sueli-santossns/loja-fic/blob/main/OneDrive/%C3%81rea%20de%20Trabalho/backend/produto.png?raw=true" alt="Tela de produtos" width="600" />
 
 ## 💻 Tecnologias Utilizadas
 
