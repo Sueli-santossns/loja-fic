@@ -15,6 +15,9 @@ Bem-vindo ao repositório da **Loja Eunice Artesanato**, um projeto completo de 
 <img src="https://github.com/Sueli-santossns/loja-fic/blob/main/lista.png?raw=true" alt="Tela de produtos" width="600" />
 ### Tela de Carrinho
 <img src="https://github.com/Sueli-santossns/loja-fic/blob/main/carrinho.png?raw=true" width="500" />
+### Tela de Cadastro
+<img src="https://github.com/Sueli-santossns/loja-fic/blob/main/cadastro.png?raw=true" alt="Tela de cadastro" width="500" />
+
 
 
 ## 💻 Tecnologias Utilizadas
