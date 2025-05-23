@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Meus Pedidos</title>
+  <link rel="stylesheet" href="./styles/style.css">
+</head>
+<body>
+  <nav>
+    <a href="login.html">Login</a>
+    <a href="cadastro.html">Cadastro</a>
+    <a href="produtos.html">Produtos</a>
+    <a href="carrinho.html">Carrinho</a>
+    <a href="meusPedidos.html">Meus Pedidos</a>
+    <a href="#" onclick="logout()" style="margin-left:auto;">Sair</a>
+  </nav>
+  <div class="container">
+    <h1>Meus Pedidos</h1>
+    <div id="pedidos"></div>
+  </div>
+
+  <script>
+    function logout() {
+      localStorage.removeItem("token");
+      alert("Você saiu!");
+      window.location.href = "login.html";
+    }
+
+    const token = localStorage.getItem("token");
+
+    fetch("http://localhost:3001/api/orders", {
+      headers: {
+        "Authorization": "Bearer " + token
+      }
+    })
+    .then(res => res.json())
+    .then(orders => {
+      const pedidosDiv = document.getElementById("pedidos");
+      if (!orders.length) {
+        pedidosDiv.innerHTML = "<p>Você ainda não tem pedidos.</p>";
+        return;
+      }
+
+      orders.forEach(pedido => {
+        const div = document.createElement("div");
+        div.className = "card";
+        div.innerHTML = `
+          <p><strong>Data:</strong> ${new Date(pedido.createdAt).toLocaleString()}</p>
+          <p><strong>Total:</strong> R$ ${pedido.total.toFixed(2)}</p>
+          <ul>
+            ${pedido.products.map(p => `
+              <li>${p.productId.name} — Qtd: ${p.quantity}</li>
+            `).join("")}
+          </ul>
+        `;
+        pedidosDiv.appendChild(div);
+      });
+    });
+  </script>
+</body>
+</html>

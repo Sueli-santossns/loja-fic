@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Carrinho</title>
+  <link rel="stylesheet" href="./styles/style.css">
+</head>
+<body>
+  <nav>
+    <a href="login.html">Login</a>
+    <a href="cadastro.html">Cadastro</a>
+    <a href="produtos.html">Produtos</a>
+    <a href="carrinho.html">Carrinho</a>
+    <a href="#" onclick="logout()" style="margin-left:auto;">Sair</a>
+  </nav>
+  <div class="container">
+    <h1>Meu Carrinho</h1>
+    <div id="carrinho"></div><button onclick="finalizarPedido()">Finalizar Pedido</button>
+
+  </div>
+
+  <script>
+    function logout() {
+      localStorage.removeItem("token");
+      alert("Você saiu!");
+      window.location.href = "login.html";
+    }
+
+    const token = localStorage.getItem("token");
+
+    function carregarCarrinho() {
+      fetch("http://localhost:3001/api/cart", {
+        headers: { "Authorization": "Bearer " + token }
+      })
+      .then(res => res.json())
+      .then(data => {
+        const carrinho = document.getElementById("carrinho");
+        carrinho.innerHTML = "";
+        if (!data.products || data.products.length === 0) {
+          carrinho.innerHTML = "<p>Carrinho vazio.</p>";
+          return;
+        }
+        data.products.forEach(p => {
+          const item = document.createElement("div");
+          item.className = "card";
+          item.innerHTML = `
+            <h3>${p.productId.name}</h3>
+            <p>Preço unitário: R$ ${p.productId.price}</p>
+            <input type="number" min="1" value="${p.quantity}" onchange="atualizarQuantidade('${p.productId._id}', this.value)">
+            <p><strong>Subtotal: R$ ${(p.quantity * p.productId.price).toFixed(2)}</strong></p>
+            <button onclick="removerItem('${p.productId._id}')">Remover</button>
+          `;
+          carrinho.appendChild(item);
+        });
+      });
+    }
+
+    function atualizarQuantidade(productId, novaQuantidade) {
+      fetch(`http://localhost:3001/api/cart/${productId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer " + token
+        },
+        body: JSON.stringify({ quantity: Number(novaQuantidade) })
+      })
+      .then(() => carregarCarrinho());
+    }
+
+    function removerItem(productId) {
+      fetch(`http://localhost:3001/api/cart/${productId}`, {
+        method: "DELETE",
+        headers: {
+          "Authorization": "Bearer " + token
+        }
+      })
+      .then(() => carregarCarrinho());
+    }
+
+    carregarCarrinho();
+    function finalizarPedido() {
+  const token = localStorage.getItem("token");
+  fetch("http://localhost:3001/api/orders", {
+    method: "POST",
+    headers: {
+      "Authorization": "Bearer " + token
+    }
+  })
+  .then(res => {
+    if (!res.ok) throw new Error("Erro ao finalizar pedido");
+    return res.json();
+  })
+  .then(() => {
+    alert("Pedido finalizado com sucesso!");
+    window.location.href = "meusPedidos.html";
+  })
+  .catch(err => {
+    console.error(err);
+    alert("Erro ao finalizar pedido.");
+  });
+}
+
+  </script>
+</body>
+</html>
