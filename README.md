@@ -20,8 +20,7 @@ Bem-vindo ao repositório da **Loja Eunice Artesanato**, um projeto completo de 
 ### Tela de Login
 <img src="https://github.com/Sueli-santossns/loja-fic/blob/main/login.png?raw=true" alt="Tela de login" width="500" />
 ### Tela de Meus Pedidos
-<img src="https://github.com/Sueli-santossns/loja-fic/blob/main/meuspedidos.png?raw=true
-" alt="Tela de Meus Pedidos" width="500" />
+<img src="https://github.com/Sueli-santossns/loja-fic/blob/main/meuspedidos.png?raw=true" alt="Tela de Meus Pedidos" width="500" />
 
 
 
