@@ -9,7 +9,10 @@ Bem-vindo ao repositório da **Loja Eunice Artesanato**, um projeto completo de 
 - Adição de produtos ao carrinho  
 - Edição e remoção de itens do carrinho  
 - Finalização de pedidos  
-- Visualização de pedidos feitos  
+- Visualização de pedidos feitos
+
+ ## 📸 Tela de Produtos
+<img src="https://raw.githubusercontent.com/Sueli-santossns/loja-fic/main/produtos.png" alt="Tela de produtos" width="600" />
 
 ## 💻 Tecnologias Utilizadas
 
